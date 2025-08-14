@@ -1,130 +1,265 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt-br">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dashboard de Análise de Vendas</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap">
-   <link rel="stylesheet" href="style.css">
+    <title>Lala-land - Wolf ERP</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --rosa-claro: #ffb6c1;
+            --rosa: #ff69b4;
+            --rosa-escuro: #ff1493;
+            --cinza-escuro: #2d2d2d;
+            --cinza-medio: #4a4a4a;
+            --cinza-claro: #f5f5f5;
+            --branco: #ffffff;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: var(--cinza-claro);
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        /* Layout principal */
+        .erp-container {
+            display: flex;
+            height: 100vh;
+        }
+
+        /* Menu lateral */
+        .sidebar {
+            width: 250px;
+            background-color: var(--cinza-escuro);
+            color: var(--branco);
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            box-shadow: 3px 0 10px rgba(0, 0, 0, 0.2);
+            z-index: 100;
+        }
+
+        .logo-area {
+            padding: 20px;
+            background-color: rgba(0, 0, 0, 0.2);
+            border-bottom: 1px solid var(--cinza-medio);
+            text-align: center;
+        }
+
+        .logo {
+            font-size: 22px;
+            font-weight: bold;
+            color: var(--branco);
+        }
+
+        .logo span:first-child {
+            color: var(--rosa);
+        }
+
+        .logo span:last-child {
+            font-size: 18px;
+            color: var(--rosa-claro);
+        }
+
+        .menu-items {
+            padding: 20px 0;
+            flex-grow: 1;
+            overflow-y: auto;
+        }
+
+        .menu-item {
+            padding: 12px 20px;
+            margin: 5px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+        }
+
+        .menu-item i {
+            margin-right: 10px;
+            font-size: 18px;
+            width: 24px;
+            text-align: center;
+        }
+
+        .menu-item:hover {
+            background-color: var(--cinza-medio);
+        }
+
+        .menu-item.active {
+            background-color: var(--rosa);
+            color: var(--branco);
+            box-shadow: 0 4px 8px rgba(255, 105, 180, 0.3);
+        }
+
+        /* Área de conteúdo */
+        .content-area {
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            width: calc(100% - 250px);
+            height: 100%;
+        }
+
+        .header {
+            background-color: var(--branco);
+            padding: 15px 25px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 10;
+        }
+
+        .main-content {
+            flex-grow: 1;
+            overflow-y: auto;
+            background-color: var(--cinza-claro);
+        }
+
+        /* Frame para o dashboard */
+        .dashboard-frame {
+            width: 100%;
+            height: 100%;
+            border: none;
+            background-color: var(--branco);
+        }
+
+        /* Footer */
+        .footer {
+            padding: 15px;
+            text-align: center;
+            background-color: var(--cinza-escuro);
+            color: var(--rosa-claro);
+            font-size: 14px;
+            border-top: 1px solid var(--cinza-medio);
+        }
+
+        /* Responsividade */
+        @media (max-width: 768px) {
+            .sidebar {
+                width: 70px;
+            }
+            
+            .logo span {
+                display: none;
+            }
+            
+            .menu-item span {
+                display: none;
+            }
+            
+            .menu-item i {
+                margin-right: 0;
+                font-size: 22px;
+            }
+            
+            .content-area {
+                width: calc(100% - 70px);
+            }
+        }
+    </style>
 </head>
 <body>
-    <div class="container">
-        <header>
-            <div class="logo">Dashboard de Análise Venda a Venda</div>
-     
-            <div class="filters">
-                <div class="filter-group">
-                    <label>PERÍODO</label>
-                    <input type="text" id="dateRange" placeholder="Selecione o período">
-                    <div class="date-range-display" id="dateDisplay">Período selecionado: 01/07/2025 a 14/07/2025</div>
+    <div class="erp-container">
+        <!-- Menu lateral -->
+        <div class="sidebar">
+            <div class="logo-area">
+                <div class="logo">
+                    <span>Lala-land</span> <span>Wolf ERP</span>
                 </div>
-                <button class="btn" id="filterBtn">Aplicar Filtros</button>
             </div>
-        </header>
-        
-        <div class="filters-row">
-            <div class="filter-group">
-                <label>LOJA</label>
-                <select id="storeFilter">
-                    <option value="">Todas as Lojas</option>
-                    <!-- Lojas serão preenchidas via JavaScript -->
-                </select>
+            
+            <div class="menu-items">
+                <!-- Item do menu para Dashboard Vendas -->
+                <div class="menu-item active" data-src="DashboardA/index.html">
+                    <i class="fas fa-chart-line"></i>
+                    <span>Dashboard Vendas</span>
+                </div>
+                
+                <!-- Item do menu para Dashboard Repasses -->
+                <div class="menu-item" data-src="repasse/index.html">
+                    <i class="fas fa-chart-pie"></i>
+                    <span>Dashboard Repasses</span>
+                </div>
+                
+                <!-- Item do menu para Dashboard Financeiro -->
+                <!-- <div class="menu-item" data-src="financeiro/index.html">
+                    <i class="fas fa-money-bill-wave"></i>
+                    <span>Dashboard Financeiro</span>
+                </div> -->
+                
+                <!-- Item do menu para Dashboard Clientes -->
+                <!-- <div class="menu-item" data-src="clientes/index.html">
+                    <i class="fas fa-users"></i>
+                    <span>Dashboard Clientes</span>
+                </div> -->
+                
+                <!-- Item do menu para Dashboard Produtos -->
+                <!-- <div class="menu-item" data-src="produtos/index.html">
+                    <i class="fas fa-box"></i>
+                    <span>Dashboard Produtos</span>
+                </div> -->
             </div>
-            <div class="filter-group">
-                <label>PRODUTO</label>
-                <input type="text" id="productFilter" placeholder="Filtrar por produto">
-            </div>
-            <div class="filter-group">
-                <label>AVALIAÇÃO</label>
-                <select id="evaluationFilter">
-                    <option value="">Todas</option>
-                    <option value="MANTER">Manter</option>
-                    <option value="AJUSTAR">Ajustar</option>
-                </select>
+            
+            <div class="footer">
+                v1.0 | Lala-land - Wolf ERP
             </div>
         </div>
         
-        <div class="dashboard-stats">
-            <div class="stat-card">
-                <div class="stat-title">Total de Pedidos</div>
-                <div class="stat-value" id="totalOrders">0</div>
-                <div class="stat-sub">Período selecionado</div>
+        <!-- Área de conteúdo -->
+        <div class="content-area">
+            <div class="header">
+                <h2 id="dashboard-title">Dashboard Vendas</h2>
             </div>
-            <div class="stat-card">
-                <div class="stat-title">Valor Bruto Total</div>
-                <div class="stat-value" id="totalGross">R$ 0,00</div>
-                <div class="stat-sub">Soma de Preço Venda</div>
-            </div>
-            <div class="stat-card">
-                <div class="stat-title">Valor Líquido Total</div>
-                <div class="stat-value" id="totalNet">R$ 0,00</div>
-                <div class="stat-sub">Soma de Margem $</div>
-            </div>
-            <div class="stat-card">
-                <div class="stat-title">Média Margem %</div>
-                <div class="stat-value" id="avgMargin">0%</div>
-                <div class="stat-sub">Média do período</div>
+            
+            <div class="main-content">
+                <iframe id="dashboard-frame" class="dashboard-frame" src="DashboardA/index.html"></iframe>
             </div>
         </div>
-        
-        <div class="charts-container">
-            <div class="chart-card">
-                <div class="chart-header">
-                    <div class="chart-title">Vendas por Dia</div>
-                    <div class="chart-actions">
-                        <button class="chart-btn active" data-type="amount">Quantidade</button>
-                        <button class="chart-btn" data-type="value">Valor</button>
-                    </div>
-                </div>
-                <div class="chart-container">
-                    <canvas id="salesChart"></canvas>
-                </div>
-            </div>
-            <div class="chart-card">
-                <div class="chart-header">
-                    <div class="chart-title">Margem por Produto</div>
-                    <div class="chart-actions">
-                        <button class="chart-btn active" data-type="percentage">%</button>
-                        <button class="chart-btn" data-type="value">R$</button>
-                    </div>
-                </div>
-                <div class="chart-container">
-                    <canvas id="marginChart"></canvas>
-                </div>
-            </div>
-        </div>
-        
-        <div class="table-container">
-            <table id="salesTable">
-                <thead>
-                    <tr>
-                        <th>ID</th>
-                        <th>Produto</th>
-                        <th>Variação</th>
-                        <th>Data</th>
-                        <th>Loja</th>
-                        <th>Quantidade</th>
-                        <th>Preço Venda</th>
-                        <th>Margem $</th>
-                        <th>Margem %</th>
-                        <th>Avaliação</th>
-                    </tr>
-                </thead>
-                <tbody id="tableBody">
-                    <tr>
-                        <td colspan="10" class="loading">Carregando dados da planilha...</td>
-                    </tr>
-                </tbody>
-            </table>
-            <div class="pagination" id="pagination"></div>
-        </div>
-        
-       
     </div>
-    
-    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <script src="script.js"></script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Seleciona todos os itens do menu
+            const menuItems = document.querySelectorAll('.menu-item');
+            const frame = document.getElementById('dashboard-frame');
+            const titleElement = document.getElementById('dashboard-title');
+            
+            // Adiciona evento de clique a cada item do menu
+            menuItems.forEach(item => {
+                item.addEventListener('click', function() {
+                    // Remove a classe 'active' de todos os itens
+                    menuItems.forEach(i => i.classList.remove('active'));
+                    
+                    // Adiciona a classe 'active' ao item clicado
+                    this.classList.add('active');
+                    
+                    // Obtém o caminho do dashboard a partir do atributo data-src
+                    const src = this.getAttribute('data-src');
+                    
+                    // Atualiza o iframe com o novo dashboard
+                    frame.src = src;
+                    
+                    // Atualiza o título do header
+                    const itemName = this.querySelector('span').textContent;
+                    titleElement.textContent = itemName;
+                });
+            });
+            
+            // Carrega o primeiro dashboard por padrão
+            frame.src = menuItems[0].getAttribute('data-src');
+        });
+    </script>
 </body>
 </html>
