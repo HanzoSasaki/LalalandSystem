@@ -5,170 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Lala-land - Wolf ERP</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <style>
-        :root {
-            --rosa-claro: #ffb6c1;
-            --rosa: #ff69b4;
-            --rosa-escuro: #ff1493;
-            --cinza-escuro: #2d2d2d;
-            --cinza-medio: #4a4a4a;
-            --cinza-claro: #f5f5f5;
-            --branco: #ffffff;
-        }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
-
-        body {
-            background-color: var(--cinza-claro);
-            height: 100vh;
-            overflow: hidden;
-        }
-
-        /* Layout principal */
-        .erp-container {
-            display: flex;
-            height: 100vh;
-        }
-
-        /* Menu lateral */
-        .sidebar {
-            width: 250px;
-            background-color: var(--cinza-escuro);
-            color: var(--branco);
-            height: 100%;
-            display: flex;
-            flex-direction: column;
-            box-shadow: 3px 0 10px rgba(0, 0, 0, 0.2);
-            z-index: 100;
-        }
-
-        .logo-area {
-            padding: 20px;
-            background-color: rgba(0, 0, 0, 0.2);
-            border-bottom: 1px solid var(--cinza-medio);
-            text-align: center;
-        }
-
-        .logo {
-            font-size: 22px;
-            font-weight: bold;
-            color: var(--branco);
-        }
-
-        .logo span:first-child {
-            color: var(--rosa);
-        }
-
-        .logo span:last-child {
-            font-size: 18px;
-            color: var(--rosa-claro);
-        }
-
-        .menu-items {
-            padding: 20px 0;
-            flex-grow: 1;
-            overflow-y: auto;
-        }
-
-        .menu-item {
-            padding: 12px 20px;
-            margin: 5px 15px;
-            border-radius: 5px;
-            cursor: pointer;
-            transition: all 0.2s ease;
-            display: flex;
-            align-items: center;
-        }
-
-        .menu-item i {
-            margin-right: 10px;
-            font-size: 18px;
-            width: 24px;
-            text-align: center;
-        }
-
-        .menu-item:hover {
-            background-color: var(--cinza-medio);
-        }
-
-        .menu-item.active {
-            background-color: var(--rosa);
-            color: var(--branco);
-            box-shadow: 0 4px 8px rgba(255, 105, 180, 0.3);
-        }
-
-        /* Área de conteúdo */
-        .content-area {
-            flex-grow: 1;
-            display: flex;
-            flex-direction: column;
-            width: calc(100% - 250px);
-            height: 100%;
-        }
-
-        .header {
-            background-color: var(--branco);
-            padding: 15px 25px;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            z-index: 10;
-        }
-
-        .main-content {
-            flex-grow: 1;
-            overflow-y: auto;
-            background-color: var(--cinza-claro);
-        }
-
-        /* Frame para o dashboard */
-        .dashboard-frame {
-            width: 100%;
-            height: 100%;
-            border: none;
-            background-color: var(--branco);
-        }
-
-        /* Footer */
-        .footer {
-            padding: 15px;
-            text-align: center;
-            background-color: var(--cinza-escuro);
-            color: var(--rosa-claro);
-            font-size: 14px;
-            border-top: 1px solid var(--cinza-medio);
-        }
-
-        /* Responsividade */
-        @media (max-width: 768px) {
-            .sidebar {
-                width: 70px;
-            }
-            
-            .logo span {
-                display: none;
-            }
-            
-            .menu-item span {
-                display: none;
-            }
-            
-            .menu-item i {
-                margin-right: 0;
-                font-size: 22px;
-            }
-            
-            .content-area {
-                width: calc(100% - 70px);
-            }
-        }
-    </style>
+   <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <div class="erp-container">
@@ -188,9 +25,9 @@
                 </div>
                 
                 <!-- Item do menu para Dashboard Repasses -->
-                <div class="menu-item" data-src="repasse/index.html">
-                    <i class="fas fa-chart-pie"></i>
-                    <span>Dashboard Repasses</span>
+                <div class="menu-item" data-src="Calculadora/index.html">
+                    <i class="fas fa-dollar"></i>
+                    <span> Calculadora </span>
                 </div>
                 
                 <!-- Item do menu para Dashboard Financeiro -->
@@ -229,37 +66,6 @@
         </div>
     </div>
 
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            // Seleciona todos os itens do menu
-            const menuItems = document.querySelectorAll('.menu-item');
-            const frame = document.getElementById('dashboard-frame');
-            const titleElement = document.getElementById('dashboard-title');
-            
-            // Adiciona evento de clique a cada item do menu
-            menuItems.forEach(item => {
-                item.addEventListener('click', function() {
-                    // Remove a classe 'active' de todos os itens
-                    menuItems.forEach(i => i.classList.remove('active'));
-                    
-                    // Adiciona a classe 'active' ao item clicado
-                    this.classList.add('active');
-                    
-                    // Obtém o caminho do dashboard a partir do atributo data-src
-                    const src = this.getAttribute('data-src');
-                    
-                    // Atualiza o iframe com o novo dashboard
-                    frame.src = src;
-                    
-                    // Atualiza o título do header
-                    const itemName = this.querySelector('span').textContent;
-                    titleElement.textContent = itemName;
-                });
-            });
-            
-            // Carrega o primeiro dashboard por padrão
-            frame.src = menuItems[0].getAttribute('data-src');
-        });
-    </script>
+    <script src="script.js"> </script>
 </body>
 </html>

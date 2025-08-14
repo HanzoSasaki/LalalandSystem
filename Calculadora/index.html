@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Financeiro</title>
+    <link rel="stylesheet" href="style.css" />
+    
+</head>
+
+<body>
+   
+    
+    <main>
+        <div class="cards-container">
+            <div class="card" onclick="abrirCalculadora('venda')">Precificação</div>
+            <div class="card" onclick="abrirCalculadora('lucro')">Calculadora Tributária</div>
+            <!-- <div class="card" onclick="abrirCalculadora('imposto')">Simulação de Promoção</div> -->
+        </div>
+    </main>
+    <div class="modal" id="modal">
+        <div class="modal-content">
+         
+            <h2 id="modal-title">Calculadora</h2>
+            <div id="modal-body"></div>
+            <h3 id="resultado"></h3>
+        </div>
+    </div>
+  
+
+   <script src="calcula.js"></script>
+</body>
+
+</html>

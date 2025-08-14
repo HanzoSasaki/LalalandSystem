@@ -1,8 +1,7 @@
-       /* Variáveis de cores */
         :root {
-            --rosa-claro: #ffb6fb;
-            --rosa: #f59ac7;
-            --rosa-escuro: #8f0f53;
+            --rosa-claro: #ffacb9;
+            --rosa: #ff69b4;
+            --rosa-escuro: #e677b2;
             --cinza-escuro: #2d2d2d;
             --cinza-medio: #4a4a4a;
             --cinza-claro: #f5f5f5;
@@ -18,7 +17,6 @@
 
         body {
             background-color: var(--cinza-claro);
-            color: var(--cinza-escuro);
             height: 100vh;
             overflow: hidden;
         }
@@ -35,28 +33,23 @@
             background-color: var(--cinza-escuro);
             color: var(--branco);
             height: 100%;
-            transition: all 0.3s ease;
             display: flex;
             flex-direction: column;
             box-shadow: 3px 0 10px rgba(0, 0, 0, 0.2);
-            z-index: 10;
+            z-index: 100;
         }
 
         .logo-area {
-            padding: 20px 15px;
+            padding: 20px;
             background-color: rgba(0, 0, 0, 0.2);
             border-bottom: 1px solid var(--cinza-medio);
+            text-align: center;
         }
 
         .logo {
             font-size: 22px;
             font-weight: bold;
-            text-align: center;
             color: var(--branco);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
         }
 
         .logo span:first-child {
@@ -68,14 +61,10 @@
             color: var(--rosa-claro);
         }
 
-        .logo-icon {
-            color: var(--rosa);
-            font-size: 24px;
-        }
-
         .menu-items {
             padding: 20px 0;
             flex-grow: 1;
+            overflow-y: auto;
         }
 
         .menu-item {
@@ -86,13 +75,13 @@
             transition: all 0.2s ease;
             display: flex;
             align-items: center;
-            text-decoration: none;
-            color: var(--branco);
         }
 
         .menu-item i {
             margin-right: 10px;
             font-size: 18px;
+            width: 24px;
+            text-align: center;
         }
 
         .menu-item:hover {
@@ -121,72 +110,31 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            z-index: 5;
-        }
-
-        .user-info {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .user-avatar {
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            background-color: var(--rosa);
-            color: var(--branco);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: bold;
+            z-index: 10;
         }
 
         .main-content {
             flex-grow: 1;
-            padding: 20px;
             overflow-y: auto;
             background-color: var(--cinza-claro);
-            position: relative;
         }
 
-        .content-frame {
+        /* Frame para o dashboard */
+        .dashboard-frame {
             width: 100%;
             height: 100%;
             border: none;
-            background: var(--branco);
-            border-radius: 10px;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+            background-color: var(--branco);
         }
 
-        .loading-overlay {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(255, 255, 255, 0.8);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            flex-direction: column;
-            z-index: 20;
-            border-radius: 10px;
-        }
-
-        .loading-spinner {
-            width: 50px;
-            height: 50px;
-            border: 5px solid var(--rosa-claro);
-            border-top: 5px solid var(--rosa);
-            border-radius: 50%;
-            animation: spin 1s linear infinite;
-            margin-bottom: 20px;
-        }
-
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
+        /* Footer */
+        .footer {
+            padding: 15px;
+            text-align: center;
+            background-color: var(--cinza-escuro);
+            color: var(--rosa-claro);
+            font-size: 14px;
+            border-top: 1px solid var(--cinza-medio);
         }
 
         /* Responsividade */
@@ -195,7 +143,11 @@
                 width: 70px;
             }
             
-            .logo span, .menu-item span {
+            .logo span {
+                display: none;
+            }
+            
+            .menu-item span {
                 display: none;
             }
             

@@ -343,8 +343,8 @@ function updateSalesChart() {
             datasets: [{
                 label: 'Quantidade de Pedidos',
                 data: amounts,
-                backgroundColor: 'rgba(185, 41, 161, 0.7)',
-                borderColor: 'rgba(185, 41, 178, 1)',
+                backgroundColor: 'rgba(230, 108, 26, 0.7)',
+                borderColor: 'rgba(231, 123, 34, 1)',
                 borderWidth: 1
             }, {
                 label: 'Valor Total (R$)',
@@ -449,8 +449,8 @@ function updateMarginChart() {
             datasets: [{
                 label: 'Margem Média (R$)',
                 data: avgValues,
-                backgroundColor: 'rgba(235, 71, 235, 0.7)',
-                borderColor: 'rgba(219, 52, 205, 1)',
+                backgroundColor: 'rgba(255, 123, 15, 0.7)',
+                borderColor: 'rgba(156, 87, 87, 1)',
                 borderWidth: 1
             }, {
                 label: 'Margem Média (%)',
