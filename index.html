@@ -2,14 +2,22 @@
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Lala-land - Wolf ERP</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-   <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <div class="erp-container">
-        <!-- Menu lateral -->
+        <!-- Botão de menu para mobile -->
+        <button class="menu-toggle" aria-label="Abrir menu" aria-expanded="false">
+            <i class="fas fa-bars"></i>
+        </button>
+
+        <!-- Overlay para fechar o menu -->
+        <div class="overlay"></div>
+
+        <!-- Menu lateral com largura aumentada -->
         <div class="sidebar">
             <div class="logo-area">
                 <div class="logo">
@@ -19,38 +27,26 @@
             
             <div class="menu-items">
                 <!-- Item do menu para Dashboard Vendas -->
-                <div class="menu-item active" data-src="DashboardA/index.html">
+                <div class="menu-item active" data-src="DashboardA/index.html" role="button" tabindex="0">
                     <i class="fas fa-chart-line"></i>
                     <span>Dashboard Vendas</span>
                 </div>
                 
                 <!-- Item do menu para Dashboard Repasses -->
-                <div class="menu-item" data-src="Calculadora/index.html">
-                    <i class="fas fa-dollar"></i>
+                <div class="menu-item" data-src="Calculadora/index.html" role="button" tabindex="0">
+                    <i class="fas fa-calculator"></i>
                     <span> Calculadora </span>
                 </div>
                 
                 <!-- Item do menu para Dashboard Financeiro -->
-             <div class="menu-item" data-src="mes/index.html">
+                <div class="menu-item" data-src="mes/index.html" role="button" tabindex="0">
                     <i class="fas fa-calendar-alt"></i>
                     <span>Analise Mês</span>
                 </div> 
-                
-                <!-- Item do menu para Dashboard Clientes -->
-                <!-- <div class="menu-item" data-src="clientes/index.html">
-                    <i class="fas fa-users"></i>
-                    <span>Dashboard Clientes</span>
-                </div> -->
-                
-                <!-- Item do menu para Dashboard Produtos -->
-                <!-- <div class="menu-item" data-src="produtos/index.html">
-                    <i class="fas fa-box"></i>
-                    <span>Dashboard Produtos</span>
-                </div> -->
             </div>
             
             <div class="footer">
-                v1.0 | Lala-land - Wolf ERP
+                v1.1 | Lala-land - Wolf ERP
             </div>
         </div>
         
@@ -61,11 +57,33 @@
             </div>
             
             <div class="main-content">
-                <iframe id="dashboard-frame" class="dashboard-frame" src="DashboardA/index.html"></iframe>
+                <!-- Loader enquanto iframe carrega -->
+                <div class="iframe-loader" id="iframe-loader">
+                    <span class="loader"></span>
+                </div>
+                <iframe id="dashboard-frame" class="dashboard-frame" src="DashboardA/index.html" title="Dashboard de Vendas" onload="hideLoader()"></iframe>
+            </div>
+        </div>
+        
+        <!-- Barra de navegação para mobile -->
+        <div class="mobile-nav">
+            <div class="nav-items">
+                <div class="nav-item active" data-target="DashboardA/index.html" role="button" tabindex="0">
+                    <i class="fas fa-chart-line"></i>
+                    <span>Vendas</span>
+                </div>
+                <div class="nav-item" data-target="Calculadora/index.html" role="button" tabindex="0">
+                    <i class="fas fa-calculator"></i>
+                    <span>Calculadora</span>
+                </div>
+                <div class="nav-item" data-target="mes/index.html" role="button" tabindex="0">
+                    <i class="fas fa-calendar-alt"></i>
+                    <span>Analise Mês</span>
+                </div>
             </div>
         </div>
     </div>
 
-    <script src="script.js"> </script>
+    <script src="script.js"></script>
 </body>
 </html>
