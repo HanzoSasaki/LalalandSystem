@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Analise Comparativa</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        .alerta {
+            position: fixed;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: var(--error-color, #e74c3c);
+            color: var(--text-color, #ffffff);
+            padding: 15px;
+            border-radius: var(--radius, 12px);
+            border: 1px solid rgba(0, 0, 0, 0.1);
+            width: 90%;
+            max-width: 600px;
+            text-align: center;
+            box-shadow: var(--shadow, 0px 4px 6px rgba(0, 0, 0, 0.1));
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            display: none;
+            z-index: 1000;
+        }
+
+        .alerta button {
+            background: none;
+            border: none;
+            font-weight: bold;
+            color: var(--text-color, #ffffff);
+            cursor: pointer;
+            position: absolute;
+            top: 5px;
+            right: 10px;
+            font-size: 18px;
+        }
+
+        /* Ajustando o gráfico para ficar dentro do container */
+        .grafico-container {
+            background: #fff;
+            border-radius: var(--radius, 12px);
+            padding: 1rem;
+            box-shadow: var(--shadow, 0px 4px 6px rgba(0, 0, 0, 0.1));
+            margin: 2rem auto 0;
+            width: 92%;
+            /* Margem lateral automática */
+            max-width: 800px;
+            height: 400px;
+            /* Altura padrão */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            position: relative;
+
+            /* Torna o elemento responsivo */
+            aspect-ratio: 16/9;
+            /* Proporção inicial (ajuste conforme necessário) */
+            height: auto;
+            /* Sobrescreve a altura fixa quando aspect-ratio está ativo */
+        }
+
+        .grafico-container canvas {
+            width: 100% !important;
+            height: 100% !important;
+            object-fit: contain;
+            /* Mantém a proporção do gráfico */
+        }
+
+        /* Media Queries para ajustes específicos */
+        @media (max-width: 1200px) {
+            .grafico-container {
+                aspect-ratio: 2/1;
+                /* Proporção mais larga para telas médias */
+            }
+        }
+
+        @media (max-width: 768px) {
+            .grafico-container {
+                aspect-ratio: unset;
+                /* Remove aspect-ratio */
+                height: 60vh;
+                /* Usa altura da viewport */
+                min-height: 300px;
+                /* Altura mínima garantida */
+                width: 95%;
+                /* Aproveita melhor o espaço */
+                padding: 0.5rem;
+                /* Reduz padding */
+            }
+        }
+
+        @media (max-width: 480px) {
+            .grafico-container {
+                height: 50vh;
+                /* Altura menor para telas pequenas */
+                min-height: 250px;
+                margin-top: 1rem;
+                /* Reduz margem superior */
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div id="loader" style="position: fixed; top: 0; left: 0; 
+    width: 100vw; height: 100vh; background: rgba(255,255,255,0.8); 
+    display: flex; justify-content: center; align-items: center; 
+    z-index: 9999; font-size: 1.5em; color: #333;">
+   <h1 id="snake-text">...</h1>
+
+</div>
+
+    <!-- Header fixo no topo -->
+
+<!-- eu não vou usar essa porra a baixo a n ser que seja pra mandar alguém tomar no cu e dar recados sobre mudança no imposto FAZ O L FILHADAPUTA
+    <div class="alerta" id="alerta">
+        <button onclick="fecharAlerta()">&#10006;</button>
+        <br>
+        Os dados são atualizados de 15 em 15 dias para precisão de dados, pois é necessário uma quantidade relevante de
+        informação para efetuar os cálculos.<br>
+        Todo dia 1 do mês posterior terá o fechamento do mês anterior, dando o valor total, e na metade desse mês haverá
+        informações base para comparações entre custos.
+    </div> -->
+
+    <!-- Painel de meses e valores -->
+    <main>
+        <div class="meses-container">
+            <!-- Meses serão gerados dinamicamente via JavaScript -->
+        </div>
+
+        <!-- Cards de totais -->
+        <div class="cards-container">
+            <div class="card">
+                <h2>Total de Custos</h2>
+                <p id="total-custos">R$ 0,00</p>
+            </div>
+            <div class="card">
+                <h2>Total de Lucro Bruto</h2>
+                <p id="total-lucro-bruto">R$ 0,00</p>
+            </div>
+            <div class="card">
+                <h2>Total de Lucro Líquido</h2>
+                <p id="total-lucro-liquido">R$ 0,00</p>
+            </div>
+            <!-- Novo card para Bruto Real -->
+         
+            
+            
+        </div>
+
+        <!-- Área para gráficos -->
+        <div class="grafico-container">
+            <canvas id="grafico-financeiro" width="400" height="300"></canvas>
+
+        </div>
+       
+        
+    </main>
+
+    <script>
+        function mostrarAlerta() {
+            document.getElementById("alerta").style.display = "block";
+        }
+
+        function fecharAlerta() {
+            document.getElementById("alerta").style.display = "none";
+        }
+
+        window.onload = function () {
+            setTimeout(mostrarAlerta, 1000); // Mostra o alerta após 1 segundo
+        };
+    </script>
+
+    <script src="script.js"></script>
+
+</body>
+
+</html>
